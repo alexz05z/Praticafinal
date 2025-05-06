@@ -21,3 +21,5 @@ Es una aplicacion la cual te permite ver los productos , clientes y pedidos que 
     -Abrir una terminal en la carpeta del proyecto y lanzar los siguientes comandos:
 
     python app.py
+
+    -Acceder a la ip que te da
