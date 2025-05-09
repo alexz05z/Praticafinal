@@ -1,4 +1,4 @@
-from flask import Flask , render_template
+from flask import Flask , render_template , request
 from datetime import date
 
 app = Flask(__name__)
@@ -28,6 +28,17 @@ def tienda():
         {"cliente": "Manolo Gomez", "total": 5000.0, "fecha": "2025-05-04"}
     ]
 
+    prod={}
+    pedid = {}
+    if request.method == "POST":
+        prod = {
+            "nombre": request.form.get("product"),
+            "precio": float(request.form.get("price")),
+            "stock": int(request.form.get("stock")),
+            "categoria": request.form.get("category")
+            }
+        productos.append(prod)
+
     total_stock = 0
     for producto in productos:
         total_stock += producto["stock"]
@@ -42,6 +53,7 @@ def tienda():
         if cliente["pedidos"] > cliente_pedido["pedidos"]:
             cliente_pedido = cliente
 
+    
 
     total = 0
     for pedido in pedidos:
