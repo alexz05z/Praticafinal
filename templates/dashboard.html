@@ -21,104 +21,219 @@
             margin-right: 25%;
         }
 
+        .navegacion{
+            text-align: center;
+            color: rgb(241, 239, 252);
+            background-color: gray;
+        }
+
+
+
+        .navegacion a {
+            color: rgb(241, 239, 252);
+            text-decoration: none;
+            outline: none;
+        }
+
+        .navegacion a:focus{
+            border-bottom: 2px solid rgb(241, 239, 252);
+    
+        }
+
+        .navegacion a:hover{
+            border-bottom: 2px solid rgb(241, 239, 252);
+        }
+
+
+
+        footer{text-align: center;
+            background-color: black;
+           
+    
+        }
+        .creditos{
+            background-color: gray;
+            border: solid 1px;
+            color: whitesmoke;
+            margin: 10px auto;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        header {
+            text-align: center;
+            background-color: black;
+            color: whitesmoke;
+        }
+
     </style>
 
 </head>
 <body>
-    <div>
-        <h1>Bienvenido, {{ nombre_admin }}</h1>
-        <h2>{{ tienda }} - {{ fecha }}</h2>
-    </div>
 
-    <br>
+    <div class="pagina">
+        <header>
+            <h1>Bienvenido, {{ nombre_admin }}</h1>
+            <h2>{{ tienda }} - {{ fecha }}</h2>
+        </header>
+        <main>
 
-    <div>
-        <h3>Catálogo de Productos</h3>
+            <div>
+                <nav class="navegacion">
+                    <a href="/">Inicio</a> |
+                    <a href="/productos">Productos</a>
+                </nav>
+            </div>
 
-        <ul>
-            {% for producto in productos %}
+            <div>
 
-                <li>
-
-                    {{ producto.nombre }} - {{ producto.precio }}€ -
-                    {{ producto.categoria }} -
-
-                    {% if producto.stock == 0 %}
-                        <strong>Agotado</strong>
-                    {% else %}
-                        {{ producto.stock }} unidades
-                    {% endif %}
-
-                </li>
-
-            {% endfor %}
-        </ul>
-
-        <p><strong>Total en stock:</strong> {{ total_stock }}</p>
-    </div>
-
-    <br>   
-
-    <div>
-        <h3>Clientes</h3>
-
-        <ul>
-            {% for cliente in clientes %}
-
-                <li>
-                    {{ cliente.nombre }} ({{ cliente.email }}) -
-                    {% if cliente.activo %}
-                        Activo
-                    {% else %}
-                        Inactivo
-                    {% endif %} - Pedidos: {{ cliente.pedidos }}
-                </li>
-
-            {% endfor %}
-
-        </ul>
-
-        <p><strong>Clientes activos:</strong> {{ clientes_activos }}</p>
-
-        <p><strong>Cliente con más pedidos:</strong> {{ cliente_pedido.nombre }} ({{ cliente_pedido.pedidos }} pedidos)</p>
-    </div>
-
-    <br>
-
-    <div>
-        <h3>Pedidos</h3>
-
-        <ul>
-            {% for pedido in pedidos %}
-                <li>{{ pedido.cliente }} - {{ pedido.total }}€ - {{ pedido.fecha }}</li>
-            {% endfor %}
-        </ul>
+                {% if pagina == "indice" %}
     
-        <p><strong>Total ingresado:</strong> {{ total }}€</p>
-    </div>
+                <h3>Catálogo de Productos</h3>
     
-    <br>
-
-    <div>
-        <form class="producto" method="post">
-            
-            <label for="productos" class="form_label">Producto: </label>
-                <input type="text" name="Producto" id="productos">
-
-            <label for="precio" class="form_label">Precio: </label>
-                <input type="text" name="Precio" id="precio">
-            
-            <label for="categoria" class="form_label">Categoria: </label>
-                <input type="text" name="Categoria" id="categoria">
-            
-            <label for="stock" class="form_label">Stock: </label>
-                <input type="number" name="Stock" id="stock">
-
-            
-
-
-        </form>
+                <ul>
+                    {% for producto in productos %}
+    
+                        <li>
+    
+                            {{ producto.nombre }} - {{ producto.precio }}€ -
+                            {{ producto.categoria }} -
+    
+                            {% if producto.stock == 0 %}
+                                <strong>Agotado</strong>
+                            {% else %}
+                            {{ producto.stock }} unidades
+                            {% endif %}
+    
+                        </li>
+    
+                    {% endfor %}
+                </ul>
+    
+                <p><strong>Total en stock:</strong> {{ total_stock }}</p> 
+            </div>
+    
+            <br>   
+    
+            <div>
+                <h3>Clientes</h3>
+    
+                <ul>
+                    {% for cliente in clientes %}
+    
+                        <li>
+                            {{ cliente.nombre }} ({{ cliente.email }}) -
+                            {% if cliente.activo %}
+                                Activo
+                            {% else %}
+                                Inactivo
+                            {% endif %} - Pedidos: {{ cliente.pedidos }}
+                        </li>
+    
+                    {% endfor %}
+    
+                </ul>
+    
+                <p><strong>Clientes activos:</strong> {{ clientes_activos }}</p>
+    
+                <p><strong>Cliente con más pedidos:</strong> {{ cliente_pedido.nombre }} ({{ cliente_pedido.pedidos }} pedidos)</p>
+            </div>
+    
+            <br>
+    
+            <div>
+                <h3>Pedidos</h3>
+    
+                <ul>
+                    {% for pedido in pedidos %}
+                        <li>{{ pedido.cliente }} - {{ pedido.total }}€ - {{ pedido.fecha }}</li>
+                    {% endfor %}
+                </ul>
+        
+                <p><strong>Total ingresado:</strong> {{ total }}€</p>
+            </div>
+        
+            <br>
+    
+            {% elif pagina == "productos" %}
+    
+            <div>
+                <h3>Catálogo de Productos</h3>
+    
+                <ul>
+                    {% for producto in productos %}
+    
+                        <li>
+    
+                            {{ producto.nombre }} - {{ producto.precio }}€ -
+                            {{ producto.categoria }} -
+    
+                            {% if producto.stock == 0 %}
+                                <strong>Agotado</strong>
+                            {% else %}
+                                {{ producto.stock }} unidades
+                            {% endif %}
+    
+                        </li>
+    
+                    {% endfor %}
+                </ul>
+    
+                <p><strong>Total en stock:</strong> {{ total_stock }}</p> 
+            </div>
+    
+            <br>
+    
+            <div>
+                <h4>Agregar producto</h4>
+                <form method="POST">
+                    <input type="hidden" name="tipo_formulario" value="agregar_productos">
+                    <input type="text" name="product" placeholder="Nombre">
+                    <input type="number" name="price" step="0.01" placeholder="Precio">
+                    <input type="text" name="category" placeholder="Categoría">
+                    <input type="number" name="stock" placeholder="Stock">
+                    <button type="submit">Agregar</button>
+                </form>
+            </div>
+    
+            <br>
+    
+            <div>
+                <h4>Eliminar producto</h4>
+                    <form method="POST">
+                        <input type="hidden" name="tipo_formulario" value="eliminar_productos">
+                        <input type="text" name="elproduct" placeholder="Nombre">
+                        <button type="submit">Eliminar</button>
+                </form>
+            </div>
+    
+            <br>
+    
+            <div>
+                <h4>Cambiar precio o stock</h4>
+                <form method="POST">
+                    <input type="hidden" name="tipo_formulario" value="cambiar_stock">
+                    <input type="text" name="prod_a_cambiar" placeholder="Nombre del producto" required>
+                    <input type="number" name="nuevo_precio" step="0.01" placeholder="Nuevo precio (opcional)">
+                    <input type="number" name="nuevo_stock" placeholder="Nuevo stock (opcional)">
+                    <button type="submit">Actualizar</button>
+                </form>
+            </div>
+    
+            {% else %}
+            <div>
+                <h3>Página no encontrada</h3>
+                <p>La sección que buscas no existe.</p>
+            </div>
+            {% endif %}
+        </main>
+        <footer>
+            <table class="creditos">
+                <tr><td>Hecho Por Alejandro Rodríguez Sánchez</td></tr>
+            </table>
+        </footer>
     </div>
 
+    
 </body>
 </html>
